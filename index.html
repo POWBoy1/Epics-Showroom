@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epic's Showroom</title>
+<link rel="icon" type="image/png" href="favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+html { scroll-behavior: smooth; }
+body {
+  margin:0; font-family:"Poppins", sans-serif; background:#0a0a0a; color:#fff;
+  overflow-x:hidden; position:relative;
+}
+a { color: inherit; text-decoration: none; transition: opacity 0.2s ease, color 0.2s ease; }
+a:hover { opacity: 0.8; }
+
+/* Canvas background */
+canvas#bgCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+}
+
+/* Profile */
+.profile {
+  text-align:center; margin:100px 20px 60px;
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(15px);
+  padding:60px 30px; border-radius:40px; box-shadow:0 20px 40px rgba(0,0,0,0.7);
+  position: relative; z-index: 1;
+  transition: all 0.3s ease;
+}
+.profile a {
+  display: inline-block; text-decoration:none; color:inherit;
+}
+.profile img {
+  width:150px; height:150px; border-radius:50%; border:3px solid #fff;
+  object-fit:cover; box-shadow:0 15px 30px rgba(255,255,255,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile img:hover { transform: scale(1.1); box-shadow:0 20px 50px rgba(255,255,255,0.5); }
+.profile h1 { margin:25px 0 15px; font-size:2.5em; color:#fff; font-weight:700; }
+.profile p { font-size:1.05em; color:#ccc; max-width:650px; margin:0 auto; line-height:1.6; font-weight:400; }
+
+/* Main */
+main { max-width:1100px; margin:0 auto; padding:60px 20px 120px; position:relative; z-index:1; }
+h2 { font-size:2.4em; margin:60px 0 30px; text-align:center; border-bottom:2px solid #fff; display:inline-block; padding-bottom:12px; font-weight:700; }
+
+/* Project Cards */
+.project {
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(20px);
+  border-radius:30px; padding:40px; margin-bottom:50px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.8), inset 0 0 25px rgba(255,255,255,0.03);
+  transform:translateY(40px); opacity:0;
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out, box-shadow 0.2s linear;
+  position: relative; z-index:1;
+}
+.project.visible { opacity:1; transform:translateY(0); }
+.project:hover { transform:translateY(-8px); }
+
+/* Buttons / Badges */
+.badges { margin-top:30px; display:flex; flex-wrap:wrap; gap:15px; justify-content:flex-start; }
+.badges a {
+  display:inline-block; padding:14px 28px; border-radius:20px;
+  border:2px solid rgba(255,255,255,0.5); color:#fff; font-weight:600; font-size:1em;
+  background:transparent; transition: all 0.35s ease; text-align:center; font-family:"Poppins", sans-serif;
+}
+.badges a:hover { background: rgba(255,255,255,0.15); box-shadow:0 0 20px rgba(255,255,255,0.7); transform:translateY(-3px); }
+
+/* Footer */
+footer { text-align:center; margin:100px 0 50px; color:#aaa; font-size:0.95em; }
+footer a { color:inherit; font-weight:bold; }
+footer a:hover { opacity:0.8; }
+
+/* Responsive */
+@media(max-width:700px){
+  .profile img{width:120px;height:120px;}
+  .badges a{padding:12px 22px;}
+}
+@media(max-width:500px){
+  main{padding:40px 15px 80px;}
+  h2{font-size:2em;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<section class="profile">
+  <a href="https://github.com/epicisgood" target="_blank">
+    <img src="https://avatars.githubusercontent.com/u/144903320?v=4" alt="Epicisgood Profile Picture">
+    <h1>epicisgood (Epic)</h1>
+  </a>
+  <p>A creator of Roblox macros and automation tools. Focused on making gameplay smoother and more efficient through AHK scripts and macros.</p>
+</section>
+
+<main>
+  <h2 id="about">About</h2>
+  <p style="text-align:center;">Welcome to Epic's Showroom — a curated collection of tools and scripts by 
+    <a href="https://github.com/epicisgood">epicisgood (Epic)</a>. 
+    Showroom created by <a href="https://github.com/POWBoy1">POWBoy1</a>.
+  </p>
+  <p style="text-align:center;">Discover macros and tools that automate repetitive Roblox gameplay tasks, streamline progress, and enhance the experience.</p>
+
+  <h2 id="projects">Projects</h2>
+  <div class="project">
+    <h3>🌱 Epic's Grow a Garden Macro</h3>
+    <p>Automatically buys seeds, gears, and eggs in Grow a Garden efficiently.</p>
+    <div class="badges">
+      <a href="https://github.com/epicisgood/Grow-a-Garden-Macro/releases/latest">⬇️ Download</a>
+      <a href="https://github.com/epicisgood/Grow-a-Garden-Macro">💻 GitHub</a>
+    </div>
+  </div>
+  <div class="project">
+    <h3>🧟 Epic's Plants VS Brainrots</h3>
+    <p>Automates seed and gear purchasing in Plants VS Brainrots.</p>
+    <div class="badges">
+      <a href="https://github.com/epicisgood/Plants-Vs-Brainrots-Macro/releases/latest">⬇️ Download</a>
+      <a href="https://github.com/epicisgood/Plants-Vs-Brainrots-Macro">💻 GitHub</a>
+    </div>
+  </div>
+  <div class="project">
+    <h3>🐝 Epic's Bee Swarm Simulator Macro</h3>
+    <p>Auto-hops servers to find Vicious Bees in Bee Swarm Simulator.</p>
+    <div class="badges">
+      <a href="https://github.com/epicisgood/VicHopMacro/releases/latest">⬇️ Download</a>
+      <a href="https://github.com/epicisgood/VicHopMacro">💻 GitHub</a>
+    </div>
+  </div>
+  <div class="project">
+    <h3>🍬 Epic's Bubble Gum Simulator Infinity Macro</h3>
+    <p>Auto farming and features for Bubble Gum Simulator Infinity.</p>
+    <div class="badges">
+      <a href="https://github.com/epicisgood/BGS-Infinity/releases/latest">⬇️ Download</a>
+      <a href="https://github.com/epicisgood/BGS-Infinity">💻 GitHub</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>Made by <a href="https://github.com/POWBoy1">POWBoy1</a> for <a href="https://github.com/epicisgood">epicisgood</a></p>
+</footer>
+
+<script>
+// Fade-in animation
+const projects = document.querySelectorAll('.project');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+  });
+},{threshold:0.2});
+projects.forEach(p=>observer.observe(p));
+
+// Cursor outline glow
+let mouse = { x:-1000, y:-1000 };
+window.addEventListener('mousemove', e=>{ mouse.x=e.clientX; mouse.y=e.clientY; });
+function updateOutlineGlow(){
+  projects.forEach(card=>{
+    const rect = card.getBoundingClientRect();
+    const closestX = Math.max(rect.left, Math.min(mouse.x, rect.right));
+    const closestY = Math.max(rect.top, Math.min(mouse.y, rect.bottom));
+    const dx = mouse.x - closestX;
+    const dy = mouse.y - closestY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const intensity = Math.max(0, 0.7 - dist/150);
+    card.style.boxShadow = intensity>0 ? `0 0 ${20*intensity}px rgba(255,255,255,${intensity})` : '';
+  });
+  requestAnimationFrame(updateOutlineGlow);
+}
+updateOutlineGlow();
+
+// Elastic grid background
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+const grid = 40, radius = 120, elasticity = 0.15, damping = 0.75;
+let points = [];
+
+function initPoints(){
+  points = [];
+  const cols = Math.ceil(w/grid)+1, rows = Math.ceil(h/grid)+1;
+  for(let i=0;i<cols;i++){
+    points[i]=[];
+    for(let j=0;j<rows;j++){
+      points[i][j]={x:i*grid, y:j*grid, offsetX:0, offsetY:0, vx:0, vy:0};
+    }
+  }
+}
+initPoints();
+window.addEventListener('resize', ()=>{ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; initPoints(); });
+
+function drawGraph(){
+  ctx.clearRect(0,0,w,h);
+  const cols = points.length, rows = points[0].length;
+  for(let i=0;i<cols;i++){
+    for(let j=0;j<rows;j++){
+      const p = points[i][j];
+      const dx = p.x-mouse.x, dy = p.y-mouse.y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<radius){
+        const force = (radius-dist)/radius*5;
+        const angle = Math.atan2(dy,dx);
+        p.vx += Math.cos(angle)*force; p.vy += Math.sin(angle)*force;
+      }
+      p.vx += -p.offsetX*elasticity; p.vy += -p.offsetY*elasticity;
+      p.vx *= damping; p.vy *= damping;
+      p.offsetX += p.vx; p.offsetY += p.vy;
+    }
+  }
+  for(let i=0;i<cols;i++){
+    for(let j=0;j<rows;j++){
+      const p = points[i][j];
+      const neighbors = [points[i+1]?.[j], points[i]?.[j+1], points[i+1]?.[j+1], points[i-1]?.[j+1]];
+      neighbors.forEach(n=>{
+        if(n){
+          const midX = (p.x+p.offsetX+n.x+n.offsetX)/2;
+          const midY = (p.y+p.offsetY+n.y+n.offsetY)/2;
+          const dx = midX-mouse.x, dy = midY-mouse.y, dist = Math.sqrt(dx*dx+dy*dy);
+          let alpha = Math.max(0.05,0.3-dist/radius);
+          ctx.strokeStyle = `rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+          ctx.beginPath(); ctx.moveTo(p.x+p.offsetX,p.y+p.offsetY); ctx.lineTo(n.x+n.offsetX,n.y+n.offsetY); ctx.stroke();
+        }
+      });
+    }
+  }
+  requestAnimationFrame(drawGraph);
+}
+drawGraph();
+</script>
+
+</body>
+</html>
