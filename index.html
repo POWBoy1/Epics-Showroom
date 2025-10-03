@@ -6,6 +6,13 @@
 <title>Epic's Showroom</title>
 <link rel="icon" type="image/png" href="favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<meta property="og:title" content="Epic's Showroom">
+<meta property="og:description" content="Check out Epic's Roblox macros, automation tools, and more.">
+<meta property="og:image" content="preview.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://powboy1.github.io/Epics-Showroom/">
+
 <style>
 html { scroll-behavior: smooth; }
 body {
@@ -155,38 +162,86 @@ footer a:hover { opacity:0.8; }
 </footer>
 
 <script>
-const projects=document.querySelectorAll('.project');
-const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}})},{threshold:0.2});
+const projects = document.querySelectorAll('.project');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+  });
+},{threshold:0.2});
 projects.forEach(p=>observer.observe(p));
 
-let mouse={x:-1000,y:-1000};
-window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+let mouse = { x:-1000, y:-1000 };
+window.addEventListener('mousemove', e=>{ mouse.x=e.clientX; mouse.y=e.clientY; });
 function updateOutlineGlow(){
   projects.forEach(card=>{
-    const rect=card.getBoundingClientRect();
-    const closestX=Math.max(rect.left,Math.min(mouse.x,rect.right));
-    const closestY=Math.max(rect.top,Math.min(mouse.y,rect.bottom));
-    const dx=mouse.x-closestX;
-    const dy=mouse.y-closestY;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    const intensity=Math.max(0,0.7-dist/150);
-    card.style.boxShadow=intensity>0?`0 0 ${20*intensity}px rgba(255,255,255,${intensity})`:'';
+    const rect = card.getBoundingClientRect();
+    const closestX = Math.max(rect.left, Math.min(mouse.x, rect.right));
+    const closestY = Math.max(rect.top, Math.min(mouse.y, rect.bottom));
+    const dx = mouse.x - closestX;
+    const dy = mouse.y - closestY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const intensity = Math.max(0, 0.7 - dist/150);
+    card.style.boxShadow = intensity > 0 ? `0 0 ${20*intensity}px rgba(255,255,255,${intensity})` : '';
   });
   requestAnimationFrame(updateOutlineGlow);
 }
 updateOutlineGlow();
 
-const canvas=document.getElementById('bgCanvas');
-const ctx=canvas.getContext('2d');
-let w=canvas.width=window.innerWidth;
-let h=canvas.height=window.innerHeight;
-const grid=40,radius=120,elasticity=0.15,damping=0.75;
-let points=[];
-function initPoints(){points=[];const cols=Math.ceil(w/grid)+1,rows=Math.ceil(h/grid)+1;for(let i=0;i<cols;i++){points[i]=[];for(let j=0;j<rows;j++){points[i][j]={x:i*grid,y:j*grid,offsetX:0,offsetY:0,vx:0,vy:0};}}}
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+const grid = 40, radius = 120, elasticity = 0.15, damping = 0.75;
+let points = [];
+function initPoints(){
+  points = [];
+  const cols = Math.ceil(w/grid)+1, rows = Math.ceil(h/grid)+1;
+  for(let i=0;i<cols;i++){
+    points[i]=[];
+    for(let j=0;j<rows;j++){
+      points[i][j]={x:i*grid,y:j*grid,offsetX:0,offsetY:0,vx:0,vy:0};
+    }
+  }
+}
 initPoints();
-window.addEventListener('resize',()=>{w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;initPoints();});
-function drawGraph(){ctx.clearRect(0,0,w,h);const cols=points.length,rows=points[0].length;for(let i=0;i<cols;i++){for(let j=0;j<rows;j++){const p=points[i][j];const dx=p.x-mouse.x,dy=p.y-mouse.y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<radius){const force=(radius-dist)/radius*5;const angle=Math.atan2(dy,dx);p.vx+=Math.cos(angle)*force;p.vy+=Math.sin(angle)*force;}p.vx+=-p.offsetX*elasticity;p.vy+=-p.offsetY*elasticity;p.vx*=damping;p.vy*=damping;p.offsetX+=p.vx;p.offsetY+=p.vy;}}for(let i=0;i<cols;i++){for(let j=0;j<rows;j++){const p=points[i][j];const neighbors=[points[i+1]?.[j],points[i]?.[j+1],points[i+1]?.[j+1],points[i-1]?.[j+1]];neighbors.forEach(n=>{if(n){const midX=(p.x+p.offsetX+n.x+n.offsetX)/2;const midY=(p.y+p.offsetY+n.y+n.offsetY)/2;const dx=midX-mouse.x,dy=midY-mouse.y,dist=Math.sqrt(dx*dx+dy*dy);let alpha=Math.max(0.05,0.3-dist/radius);ctx.strokeStyle=`rgba(255,255,255,${alpha})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p.x+p.offsetX,p.y+p.offsetY);ctx.lineTo(n.x+n.offsetX,n.y+n.offsetY);ctx.stroke();}});}}requestAnimationFrame(drawGraph);}
+window.addEventListener('resize', ()=>{ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; initPoints(); });
+function drawGraph(){
+  ctx.clearRect(0,0,w,h);
+  const cols=points.length, rows=points[0].length;
+  for(let i=0;i<cols;i++){
+    for(let j=0;j<rows;j++){
+      const p=points[i][j];
+      const dx=p.x-mouse.x, dy=p.y-mouse.y, dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<radius){
+        const force=(radius-dist)/radius*5;
+        const angle=Math.atan2(dy,dx);
+        p.vx+=Math.cos(angle)*force; p.vy+=Math.sin(angle)*force;
+      }
+      p.vx+=-p.offsetX*elasticity; p.vy+=-p.offsetY*elasticity;
+      p.vx*=damping; p.vy*=damping;
+      p.offsetX+=p.vx; p.offsetY+=p.vy;
+    }
+  }
+  for(let i=0;i<cols;i++){
+    for(let j=0;j<rows;j++){
+      const p=points[i][j];
+      const neighbors=[points[i+1]?.[j],points[i]?.[j+1],points[i+1]?.[j+1],points[i-1]?.[j+1]];
+      neighbors.forEach(n=>{
+        if(n){
+          const midX=(p.x+p.offsetX+n.x+n.offsetX)/2;
+          const midY=(p.y+p.offsetY+n.y+n.offsetY)/2;
+          const dx=midX-mouse.x, dy=midY-mouse.y, dist=Math.sqrt(dx*dx+dy*dy);
+          let alpha=Math.max(0.05,0.3-dist/radius);
+          ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
+          ctx.beginPath(); ctx.moveTo(p.x+p.offsetX,p.y+p.offsetY); ctx.lineTo(n.x+n.offsetX,n.y+n.offsetY); ctx.stroke();
+        }
+      });
+    }
+  }
+  requestAnimationFrame(drawGraph);
+}
 drawGraph();
 </script>
+
 </body>
 </html>

@@ -35,7 +35,7 @@ Discover a variety of tools and scripts, including AHK/macros designed to enhanc
 
 ---
 
-✨ More projects coming soon — stay tuned for updates!
+✨ Go to [here](https://powboy1.github.io/Epics-Showroom/) to see the Showroom.
 
 ---
 
