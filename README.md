@@ -28,11 +28,6 @@ Discover a variety of tools and scripts, including AHK/macros designed to enhanc
   [![⬇️ Download](https://img.shields.io/badge/⬇️%20Download-green)](https://github.com/epicisgood/VicHopMacro/releases/latest) 
   [![💻 GitHub](https://img.shields.io/badge/💻%20GitHub-black)](https://github.com/epicisgood/VicHopMacro)
 
-- 🍬 **Epic's Bubble Gum Simulator Infinity Macro**  
-  Auto farm in Bubble Gum Simulator Infinity.  
-  [![⬇️ Download](https://img.shields.io/badge/⬇️%20Download-green)](https://github.com/epicisgood/BGS-Infinity/releases/latest) 
-  [![💻 GitHub](https://img.shields.io/badge/💻%20GitHub-black)](https://github.com/epicisgood/BGS-Infinity)
-
 ---
 
 ✨ Go to [here](https://powboy1.github.io/Epics-Showroom/) to see the Showroom.
