@@ -1,323 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Epic's Showroom</title>
-<link rel="icon" type="image/png" href="favicon.ico">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epic's Macro</title>
 
-<meta property="og:title" content="Epic's Showroom">
-<meta property="og:description" content="Check out Epic's Roblox macros, automation tools, and more.">
-<meta property="og:image" content="https://raw.githubusercontent.com/POWBoy1/Epics-Showroom/refs/heads/main/preview.png">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://powboy1.github.io/Epics-Showroom/">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<style>
-html { scroll-behavior: smooth; }
-body {
-  margin:0; font-family:"Poppins", sans-serif; background:#0a0a0a; color:#fff;
-  overflow-x:hidden; position:relative;
-}
-a { color: inherit; text-decoration: none; transition: opacity 0.2s ease, color 0.2s ease; }
-a:hover { opacity: 0.8; }
-canvas#bgCanvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: -1;
-}
-.profile {
-  text-align:center; margin:100px 20px 60px;
-  background: rgba(255,255,255,0.05); backdrop-filter: blur(15px);
-  padding:60px 30px; border-radius:40px; box-shadow:0 20px 40px rgba(0,0,0,0.7);
-  position: relative; z-index: 1;
-  transition: all 0.3s ease;
-}
-.profile a {
-  display: inline-block; text-decoration:none; color:inherit;
-}
-.profile img {
-  width:150px; height:150px; border-radius:50%; border:3px solid #fff;
-  object-fit:cover; box-shadow:0 15px 30px rgba(255,255,255,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.profile img:hover { transform: scale(1.1); box-shadow:0 20px 50px rgba(255,255,255,0.5); }
-.profile h1 { margin:25px 0 15px; font-size:2.5em; color:#fff; font-weight:700; }
-.profile p { font-size:1.05em; color:#ccc; max-width:650px; margin:0 auto; line-height:1.6; font-weight:400; }
-main { max-width:1100px; margin:0 auto; padding:60px 20px 120px; position:relative; z-index:1; }
-h2 { font-size:2.4em; margin:60px 0 30px; text-align:center; border-bottom:2px solid #fff; display:inline-block; padding-bottom:12px; font-weight:700; }
-.project {
-  background: rgba(255,255,255,0.05); backdrop-filter: blur(20px);
-  border-radius:30px; padding:40px; margin-bottom:50px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.8), inset 0 0 25px rgba(255,255,255,0.03);
-  transform:translateY(40px); opacity:0;
-  transition: transform 0.6s ease-out, opacity 0.6s ease-out, box-shadow 0.2s linear;
-  position: relative; z-index:1;
-}
-.project.visible { opacity:1; transform:translateY(0); }
-.project:hover { transform:translateY(-8px); }
-.badges { margin-top:30px; display:flex; flex-wrap:wrap; gap:15px; justify-content:flex-start; }
-.badges a {
-  display:inline-block; padding:14px 28px; border-radius:20px;
-  border:2px solid rgba(255,255,255,0.5); color:#fff; font-weight:600; font-size:1em;
-  background:transparent; transition: all 0.35s ease; text-align:center; font-family:"Poppins", sans-serif;
-}
-.badges a:hover { background: rgba(255,255,255,0.15); box-shadow:0 0 20px rgba(255,255,255,0.7); transform:translateY(-3px); }
+  <meta property="og:title" content="Epic's Showroom">
+  <meta property="og:description" content="Check out Epic's Roblox macros, automation tools, and more.">
+  <meta property="og:image"
+    content="https://raw.githubusercontent.com/POWBoy1/Epics-Showroom/refs/heads/main/preview.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://powboy1.github.io/Epics-Showroom/">
 
-.comparison {
-  text-align: center;
-  margin: 100px auto;
-  max-width: 1100px;
-}
-.comparison h2 {
-  font-size: 2em;
-  margin-bottom: 50px;
-  color: #fff;
-}
-.comparison-cards {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap;
-}
-.comparison .card {
-  flex: 1 1 450px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.comparison .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(255,255,255,0.2);
-}
-.comparison .card h3 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-}
-.comparison .card p {
-  margin-bottom: 20px;
-  font-size: 1em;
-  color: #bbb;
-}
-.comparison .card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.comparison .card li {
-  margin: 10px 0;
-  font-size: 1.05em;
-  color: #ddd;
-}
-.comparison .card li::before {
-  content: "• ";
-  color: #2c7be5;
-  font-weight: bold;
-}
-
-.discord-info { text-align:center; margin:60px 0; background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); padding:35px; border-radius:25px; box-shadow:0 10px 25px rgba(0,0,0,0.6); }
-.discord-info p:first-child { font-size:1.1em; color:#fff; margin-bottom:15px; font-weight:600; }
-.discord-btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 14px 30px;
-  border-radius: 25px;
-  border: 2px solid rgba(255,255,255,0.5);
-  background: rgba(114, 137, 218, 0.1);
-  color: #fff;
-  font-weight: 600;
-  font-size: 1em;
-  text-align: center;
-  backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
-}
-.discord-btn:hover {
-  background: rgba(114, 137, 218, 0.25);
-  box-shadow: 0 0 20px rgba(114, 137, 218, 0.7);
-  transform: translateY(-3px);
-}
-footer { text-align:center; margin:100px 0 50px; color:#aaa; font-size:0.95em; }
-footer a { color:inherit; font-weight:bold; }
-footer a:hover { opacity:0.8; }
-@media(max-width:700px){
-  .profile img{width:120px;height:120px;}
-  .badges a{padding:12px 22px;}
-}
-@media(max-width:500px){
-  main{padding:40px 15px 80px;}
-  h2{font-size:2em;}
-}
-</style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<canvas id="bgCanvas"></canvas>
 
-<section class="profile">
-  <a href="https://github.com/epicisgood" target="_blank">
-    <img src="https://avatars.githubusercontent.com/u/144903320?v=4" alt="Epicisgood Profile Picture">
-    <h1>epicisgood (Epic)</h1>
-  </a>
-  <p>A creator of Roblox macros and automation tools. Focused on making gameplay smoother and more efficient through AHK scripts and macros.</p>
-</section>
+  <div class="scroll-progress"></div>
 
-<main>
-  <h2 id="about">About</h2>
-  <p style="text-align:center;">Welcome to Epic's Showroom — a curated collection of tools and scripts by 
-    <a href="https://github.com/epicisgood">epicisgood (Epic)</a>. 
-    Showroom created by <a href="https://github.com/POWBoy1">POWBoy1</a>.
-  </p>
-  <p style="text-align:center;">Discover macros and tools that automate repetitive Roblox gameplay tasks, streamline progress, and enhance the experience.</p>
+  <div class="bg-grid"></div>
 
-  <h2 id="projects">Projects</h2>
-  <div class="project">
-    <h3>🌱 Epic's Grow a Garden Macro</h3>
-    <p>Automatically buys seeds, gears, and eggs in Grow a Garden efficiently.</p>
-    <div class="badges">
-      <a href="https://github.com/epicisgood/Grow-a-Garden-Macro/releases/latest">⬇️ Download</a>
-      <a href="https://github.com/epicisgood/Grow-a-Garden-Macro">💻 GitHub</a>
+  <header class="navbar">
+    <div class="container">
+      <a class="logo" href="#">Epic's Macro</a>
+
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#community">Community</a>
+      </nav>
     </div>
-  </div>
-  <div class="project">
-    <h3>🧟 Epic's Plants VS Brainrots</h3>
-    <p>Automates seed and gear purchasing in Plants VS Brainrots.</p>
-    <div class="badges">
-      <a href="https://github.com/epicisgood/Plants-Vs-Brainrots-Macro/releases/latest">⬇️ Download</a>
-      <a href="https://github.com/epicisgood/Plants-Vs-Brainrots-Macro">💻 GitHub</a>
-    </div>
-  </div>
-  <div class="project">
-    <h3>🐝 Epic's Bee Swarm Simulator Macro</h3>
-    <p>Auto-hops servers to find Vicious Bees in Bee Swarm Simulator.</p>
-    <div class="badges">
-      <a href="https://github.com/epicisgood/VicHopMacro/releases/latest">⬇️ Download</a>
-      <a href="https://github.com/epicisgood/VicHopMacro">💻 GitHub</a>
-    </div>
-  </div>
+  </header>
 
-  <section class="comparison">
-    <h2>Epic's Macros vs Virage's Macros</h2>
-    <div class="comparison-cards">
-      <div class="card epic">
-        <h3>✅ Epic's Macros</h3>
-        <p>Trusted, community-driven, and always improving.</p>
-        <ul>
-          <li>Frequent updates with new features</li>
-          <li>Free to use, no hidden paywalls</li>
-          <li>Active community support</li>
-          <li>Optimized for performance</li>
-          <li>Experienced Macro Creator</li>
-        </ul>
+  <section class="hero">
+    <div class="container hero-content">
+
+      <img class="avatar" src="https://avatars.githubusercontent.com/u/144903320?v=4" alt="Epic">
+
+      <h1>Epic</h1>
+
+      <p>
+        Creating Roblox automation tools focused on reliability,
+        performance, and ease of use.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn primary">View Projects</a>
+
+        <a href="https://github.com/epicisgood" target="_blank" class="btn secondary">
+          GitHub
+        </a>
       </div>
-      <div class="card virage">
-        <h3>⚠️ Virage's Macros</h3>
-        <p>Outdated and less reliable compared to Epic’s.</p>
-        <ul>
-          <li>Updates are slow and inconsistent</li>
-          <li>Paywalls restrict access</li>
-          <li>Limited or inactive support</li>
-          <li>Prone to bugs and inefficiency</li>
-          <li>Less experienced macro creator</li>
-        </ul>
-      </div>
+
     </div>
   </section>
 
-  <section class="discord-info">
-    <p>Need help, support, or more information about Epic's macros?</p>
-    <a href="https://discord.com/invite/Vc465gUXHk" target="_blank" class="discord-btn">Join our Discord Server</a>
-  </section>
-</main>
+  <main class="container">
 
-<footer>
-  <p>Made by <a href="https://github.com/POWBoy1">POWBoy1</a> for <a href="https://github.com/epicisgood">epicisgood</a></p>
-</footer>
+    <section id="about" class="section">
+      <h2>About</h2>
+      <p class="section-text">
+        Hello! I'm Epic, a developer focused on creating Roblox automation tools.
+      </p>
+    </section>
 
-<script>
-const projects = document.querySelectorAll('.project');
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-  });
-},{threshold:0.2});
-projects.forEach(p=>observer.observe(p));
+    <section id="projects" class="section">
+      <h2>Projects</h2>
 
-let mouse = { x:-1000, y:-1000 };
-window.addEventListener('mousemove', e=>{ mouse.x=e.clientX; mouse.y=e.clientY; });
-function updateOutlineGlow(){
-  projects.forEach(card=>{
-    const rect = card.getBoundingClientRect();
-    const closestX = Math.max(rect.left, Math.min(mouse.x, rect.right));
-    const closestY = Math.max(rect.top, Math.min(mouse.y, rect.bottom));
-    const dx = mouse.x - closestX;
-    const dy = mouse.y - closestY;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    const intensity = Math.max(0, 0.7 - dist/150);
-    card.style.boxShadow = intensity > 0 ? `0 0 ${20*intensity}px rgba(255,255,255,${intensity})` : '';
-  });
-  requestAnimationFrame(updateOutlineGlow);
-}
-updateOutlineGlow();
+      <div class="project-grid">
 
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-let w = canvas.width = window.innerWidth;
-let h = canvas.height = window.innerHeight;
-const grid = 40, radius = 120, elasticity = 0.15, damping = 0.75;
-let points = [];
-function initPoints(){
-  points = [];
-  const cols = Math.ceil(w/grid)+1, rows = Math.ceil(h/grid)+1;
-  for(let i=0;i<cols;i++){
-    points[i]=[];
-    for(let j=0;j<rows;j++){
-      points[i][j]={x:i*grid,y:j*grid,offsetX:0,offsetY:0,vx:0,vy:0};
-    }
-  }
-}
-initPoints();
-window.addEventListener('resize', ()=>{ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; initPoints(); });
-function drawGraph(){
-  ctx.clearRect(0,0,w,h);
-  const cols=points.length, rows=points[0].length;
-  for(let i=0;i<cols;i++){
-    for(let j=0;j<rows;j++){
-      const p=points[i][j];
-      const dx=p.x-mouse.x, dy=p.y-mouse.y, dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<radius){
-        const force=(radius-dist)/radius*5;
-        const angle=Math.atan2(dy,dx);
-        p.vx+=Math.cos(angle)*force; p.vy+=Math.sin(angle)*force;
-      }
-      p.vx+=-p.offsetX*elasticity; p.vy+=-p.offsetY*elasticity;
-      p.vx*=damping; p.vy*=damping;
-      p.offsetX+=p.vx; p.offsetY+=p.vy;
-    }
-  }
-  for(let i=0;i<cols;i++){
-    for(let j=0;j<rows;j++){
-      const p=points[i][j];
-      const neighbors=[points[i+1]?.[j],points[i]?.[j+1],points[i+1]?.[j+1],points[i-1]?.[j+1]];
-      neighbors.forEach(n=>{
-        if(n){
-          const midX=(p.x+p.offsetX+n.x+n.offsetX)/2;
-          const midY=(p.y+p.offsetY+n.y+n.offsetY)/2;
-          const dx=midX-mouse.x, dy=midY-mouse.y, dist=Math.sqrt(dx*dx+dy*dy);
-          let alpha=Math.max(0.05,0.3-dist/radius);
-          ctx.strokeStyle=`rgba(255,255,255,${alpha})`; ctx.lineWidth=1;
-          ctx.beginPath(); ctx.moveTo(p.x+p.offsetX,p.y+p.offsetY); ctx.lineTo(n.x+n.offsetX,n.y+n.offsetY); ctx.stroke();
-        }
-      });
-    }
-  }
-  requestAnimationFrame(drawGraph);
-}
-drawGraph();
-</script>
+        <article class="project reveal">
+
+          <div class="project-icon">
+            <img src="assets/Grow-a-Garden-Macro.png" alt="Grow a Garden Macro icon">
+          </div>
+
+          <h3>Grow a Garden Macro</h3>
+
+          <p>
+            A Grow a Garden Macro to Automate Shops, Events, and Crafting.
+          </p>
+
+          <div class="actions">
+
+            <a href="https://github.com/epicisgood/Grow-a-Garden-Macro/releases/latest" target="_blank"
+              class="btn primary">
+              <i class="fas fa-download"></i>
+              Download
+            </a>
+
+            <a href="https://github.com/epicisgood/Grow-a-Garden-Macro" target="_blank" class="btn secondary">
+              <i class="fab fa-github"></i>
+              GitHub
+            </a>
+
+          </div>
+
+        </article>
+
+        <article class="project reveal">
+
+          <div class="project-icon">
+            <img src="assets/Grow-a-Garden-2-Macro.png" alt="Grow a Garden 2 Macro icon">
+          </div>
+
+          <h3>Grow a Garden 2 Macro</h3>
+
+          <p>
+            A Grow a Garden 2 Macro to buy seeds, gear, and props automatically.
+          </p>
+
+          <div class="actions">
+
+            <a href="https://github.com/epicisgood/Grow-a-Garden-2-Macro/releases/latest" target="_blank"
+              class="btn primary">
+              <i class="fas fa-download"></i>
+              Download
+            </a>
+
+            <a href="https://github.com/epicisgood/Grow-a-Garden-2-Macro" target="_blank" class="btn secondary">
+              <i class="fab fa-github"></i>
+              GitHub
+            </a>
+
+          </div>
+
+        </article>
+
+        <article class="project reveal">
+
+          <div class="project-icon">
+            <img src="assets/Garden-Horizon-Macro.png" alt="Garden Horizon Macro icon">
+          </div>
+
+          <h3>Garden Horizon Macro</h3>
+
+          <p>
+            A Garden Horizon Macro to Automate Shops!
+          </p>
+
+          <div class="actions">
+
+            <a href="https://github.com/epicisgood/Garden-Horizon-Macro/releases/latest" target="_blank"
+              class="btn primary">
+              <i class="fas fa-download"></i>
+              Download
+            </a>
+
+            <a href="https://github.com/epicisgood/Garden-Horizon-Macro" target="_blank" class="btn secondary">
+              <i class="fab fa-github"></i>
+              GitHub
+            </a>
+
+          </div>
+
+        </article>
+
+        <article class="project reveal">
+
+          <div class="project-icon">
+            <img src="assets/Plants-VS-Brainrots-Macro.png" alt="Plants VS Brainrots icon">
+          </div>
+
+          <h3>Plants VS Brainrots Macro</h3>
+
+          <p>
+            Plants VS Brainrots Macro to automate shops.
+          </p>
+
+          <div class="actions">
+
+            <a href="https://github.com/epicisgood/Plants-Vs-Brainrots-Macro/releases/latest" target="_blank"
+              class="btn primary">
+              <i class="fas fa-download"></i>
+              Download
+            </a>
+
+            <a href="https://github.com/epicisgood/Plants-Vs-Brainrots-Macro" target="_blank" class="btn secondary">
+              <i class="fab fa-github"></i>
+              GitHub
+            </a>
+
+          </div>
+
+        </article>
+
+        <article class="project reveal">
+
+          <div class="project-icon">
+            <img src="assets/VicHopMacro.png" alt="Bee Swarm Simulator icon">
+          </div>
+
+          <h3>VicHopMacro</h3>
+
+          <p>
+            Bee Swarm Simulator Macro for stingers!
+          </p>
+
+          <div class="actions">
+
+            <a href="https://github.com/epicisgood/VicHopMacro/releases/latest" target="_blank" class="btn primary">
+              <i class="fas fa-download"></i>
+              Download
+            </a>
+
+            <a href="https://github.com/epicisgood/VicHopMacro" target="_blank" class="btn secondary">
+              <i class="fab fa-github"></i>
+              GitHub
+            </a>
+
+          </div>
+
+        </article>
+
+      </div>
+    </section>
+
+    <section id="community" class="community reveal">
+
+      <h2>Community</h2>
+
+      <p>
+        Need help, support, or want updates on new releases?
+      </p>
+
+      <a href="https://discord.com/invite/Vc465gUXHk" target="_blank" class="btn primary">
+        Join Discord
+      </a>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Made by POW_Boy1 (POWBoy1) for Epic (epicisgood)
+  </footer>
+
+    <script src="js/scroll.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
+
 </html>
